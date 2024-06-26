@@ -8,6 +8,8 @@ import {
     TableRow,
     TableCell, getKeyValue
 } from "@nextui-org/table";
+import StatusChip from "@/app/ui/applications/status-chip";
+import WorkTypeChip from "@/app/ui/applications/work-type-chip";
 
 export default function ApplicationTable({applications}: { applications: Application[] }) {
     return (
@@ -29,11 +31,15 @@ export default function ApplicationTable({applications}: { applications: Applica
                         <TableCell>{application.company_name}</TableCell>
                         <TableCell>{application.position}</TableCell>
                         <TableCell>{new Date(application.application_date).toLocaleDateString()}</TableCell>
-                        <TableCell>{application.status}</TableCell>
+                        <TableCell>
+                            <StatusChip status={application.status} />
+                        </TableCell>
                         <TableCell>{application.notes}</TableCell>
                         <TableCell>{new Date(application.follow_up_date).toLocaleDateString()}</TableCell>
                         <TableCell>{application.location}</TableCell>
-                        <TableCell>{application.work_type}</TableCell>
+                        <TableCell>
+                            <WorkTypeChip workType={application.work_type} />
+                        </TableCell>
                         <TableCell>{application.application_link}</TableCell>
                     </TableRow>
                 )}
