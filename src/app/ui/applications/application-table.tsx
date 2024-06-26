@@ -12,6 +12,9 @@ import StatusChip from "@/app/ui/applications/status-chip";
 import WorkTypeChip from "@/app/ui/applications/work-type-chip";
 
 export default function ApplicationTable({applications}: { applications: Application[] }) {
+
+    console.log(applications)
+
     return (
         <Table aria-label="application table">
             <TableHeader className={'text-gray-500'}>

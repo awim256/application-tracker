@@ -18,7 +18,6 @@ export default async function Page() {
                     href="/dashboard/applications/new"
                     as={Link}
                     color="primary"
-                    showAnchorIcon
                     variant="solid"
                 >
                     Add new application
