@@ -1,12 +1,6 @@
 import Image from "next/image";
-import {fetchApplications} from "@/app/lib/database/application";
-import {Application} from "@/app/lib/model/application";
 
 export default async function Home() {
-  const revenue: Application[] = await fetchApplications();
-
-  console.log(revenue)
-
   return (
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">

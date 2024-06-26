@@ -7,7 +7,7 @@ import {ChartBarIcon, HomeIcon, InboxStackIcon} from "@heroicons/react/24/outlin
 
 const links: any = [
     {name: 'Home', icon: HomeIcon, href: '/dashboard'},
-    {name: 'Applications', icon: InboxStackIcon, href: '#'},
+    {name: 'Applications', icon: InboxStackIcon, href: '/dashboard/applications'},
     {name: 'Reports', icon: ChartBarIcon, href: '#'},
 ];
 
