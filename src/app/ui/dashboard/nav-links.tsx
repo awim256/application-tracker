@@ -5,7 +5,13 @@ import Link from 'next/link';
 import {usePathname} from "next/navigation";
 import {ChartBarIcon, HomeIcon, InboxStackIcon} from "@heroicons/react/24/outline";
 
-const links: any = [
+interface NavLink {
+    name: string;
+    icon: any;
+    href: string;
+}
+
+const links: NavLink[] = [
     {name: 'Home', icon: HomeIcon, href: '/dashboard'},
     {name: 'Applications', icon: InboxStackIcon, href: '/dashboard/applications'},
     {name: 'Reports', icon: ChartBarIcon, href: '#'},
@@ -16,7 +22,7 @@ export default function NavLinks() {
 
     return (
         <>
-            {links.map((link) => {
+            {links.map((link: NavLink) => {
                 const LinkIcon = link.icon;
                 return (
                     <Link

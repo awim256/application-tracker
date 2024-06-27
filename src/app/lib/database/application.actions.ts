@@ -25,12 +25,26 @@ const FormSchema = z.object({
     id: z.string(),
     companyName: z.string().min(1, {message: 'Please enter a company name.'}),
     position: z.string().min(1, {message: 'Please enter a position.'}),
-    applicationDate: z.string().min(1, {message: "Please select the date you applied"}).pipe(z.coerce.date()),
+    applicationDate: z.string().refine(
+        (dateString) => {
+            const date = new Date(dateString);
+            return !isNaN(date.getTime()) && date < new Date();
+        }, {
+            message: 'Please enter a valid date application date',
+        }
+    ),
     status: z.nativeEnum(ApplicationStatus, {
         errorMap: (issue, ctx) => ({message: 'Please select a status'}),
     }),
     notes: z.string().optional(),
-    followUpDate: z.string().min(1, {message: "Please select a follow up date"}).pipe(z.coerce.date()),
+    followUpDate: z.string().refine(
+        (dateString) => {
+            const date = new Date(dateString);
+            return !isNaN(date.getTime()) && date > new Date();
+        }, {
+            message: 'Please enter a valid follow up date',
+        }
+    ),
     location: z.string().min(1, {message: 'Please enter a location.'}),
     workType: z.nativeEnum(WorkType, {
         errorMap: (issue, ctx) => ({message: 'Please select a status'}),

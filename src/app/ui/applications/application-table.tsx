@@ -33,12 +33,12 @@ export default function ApplicationTable({applications}: { applications: Applica
                     <TableRow key={application.id}>
                         <TableCell>{application.company_name}</TableCell>
                         <TableCell>{application.position}</TableCell>
-                        <TableCell>{new Date(application.application_date).toLocaleDateString()}</TableCell>
+                        <TableCell>{application?.application_date?.toDateString()}</TableCell>
                         <TableCell>
                             <StatusChip status={application.status} />
                         </TableCell>
                         <TableCell>{application.notes}</TableCell>
-                        <TableCell>{new Date(application.follow_up_date).toLocaleDateString()}</TableCell>
+                        <TableCell>{application?.follow_up_date?.toDateString()}</TableCell>
                         <TableCell>{application.location}</TableCell>
                         <TableCell>
                             <WorkTypeChip workType={application.work_type} />
