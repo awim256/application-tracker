@@ -13,7 +13,7 @@ export interface Application {
     updated_at: Date,
 }
 
-export const enum ApplicationStatus {
+export enum ApplicationStatus {
     APPLIED = 'Applied',
     INTERVIEW = 'Interview',
     REJECTED = 'Rejected',
@@ -23,7 +23,7 @@ export const enum ApplicationStatus {
     ARCHIVED = 'Archived',
 }
 
-export const enum WorkType {
+export enum WorkType {
     REMOTE = 'Remote',
     HYBRID = 'Hybrid',
     ONSITE = 'Onsite',
