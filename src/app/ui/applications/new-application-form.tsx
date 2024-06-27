@@ -16,8 +16,6 @@ export default function NewApplicationForm() {
 
     const [state, formAction] = useFormState(createApplication, initialState);
 
-    console.log(state);
-
     return (
         <div className='rounded-lg bg-gray-50 p-4 md:p-6'>
             <h1 className="text-xl mt-2 mb-4">Add a new application to track</h1>
@@ -103,7 +101,7 @@ export default function NewApplicationForm() {
                         />
                     </div>
                 </div>
-                <div className="my-5 flex justify-between">
+                <div className="mt-6 flex justify-end gap-4">
                     <Button
                         as={Link}
                         href="/dashboard/applications"
