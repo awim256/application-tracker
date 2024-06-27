@@ -1,12 +1,12 @@
 "use client";
 import {Application} from "@/app/lib/model/application";
 import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow,} from "@nextui-org/table";
-import StatusChip from "@/app/ui/applications/status-chip";
+import StatusChip from "@/ui/applications/status-chip";
 import {fetchFilteredApplications} from "@/app/lib/database/application";
 import {useEffect, useState} from "react";
 import {Link} from "@nextui-org/react";
-import EditButton from "@/app/ui/applications/edit-button";
-import DeleteButton from "@/app/ui/applications/delete-button";
+import EditButton from "@/ui/applications/edit-button";
+import DeleteButton from "@/ui/applications/delete-button";
 
 export default function ApplicationTable({
                                              query,

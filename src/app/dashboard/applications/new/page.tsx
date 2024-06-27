@@ -1,4 +1,4 @@
-import NewApplicationForm from "@/app/ui/applications/new-application-form";
+import NewApplicationForm from "@/ui/applications/new-application-form";
 
 export default function Page() {
     return (

@@ -1,11 +1,11 @@
-import ApplicationTable from "@/app/ui/applications/application-table";
+import ApplicationTable from "@/ui/applications/application-table";
 import {Application} from "@/app/lib/model/application";
 import {fetchApplicationPages, fetchApplications} from "@/app/lib/database/application";
 import {Button} from "@nextui-org/button";
 import Link from "next/link";
-import Search from "@/app/ui/applications/search";
+import Search from "@/ui/applications/search";
 import {Suspense} from "react";
-import PaginationContainer from "@/app/ui/applications/pagination-container";
+import PaginationContainer from "@/ui/applications/pagination-container";
 
 export default async function Page({searchParams}: {
     searchParams?: {
