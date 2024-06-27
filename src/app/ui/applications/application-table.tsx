@@ -1,20 +1,12 @@
 "use client";
 import {Application} from "@/app/lib/model/application";
-import {
-    Table,
-    TableHeader,
-    TableBody,
-    TableColumn,
-    TableRow,
-    TableCell,
-} from "@nextui-org/table";
+import {Table, TableBody, TableCell, TableColumn, TableHeader, TableRow,} from "@nextui-org/table";
 import StatusChip from "@/app/ui/applications/status-chip";
-
 import {fetchFilteredApplications} from "@/app/lib/database/application";
 import {useEffect, useState} from "react";
 import {Link} from "@nextui-org/react";
-import {Tooltip} from "@nextui-org/tooltip";
-import {DeleteIcon, EditIcon, EyeIcon} from "@nextui-org/shared-icons";
+import EditButton from "@/app/ui/applications/edit-button";
+import DeleteButton from "@/app/ui/applications/delete-button";
 
 export default function ApplicationTable({
                                              query,
@@ -26,6 +18,7 @@ export default function ApplicationTable({
     const [applications, setApplications] = useState<Application[]>([]);
 
     useEffect(() => {
+        console.log('fetching applications');
         const filterApplications = async (): Promise<void> => {
             try {
                 const filteredApplications: Application[] = await fetchFilteredApplications(query, currentPage);
@@ -70,17 +63,8 @@ export default function ApplicationTable({
                         <TableCell>{application.notes}</TableCell>
                         <TableCell>
                             <div className="relative flex items-center gap-2">
-                                <Tooltip content="Edit user">
-                                    <Link className="text-lg text-default-500 cursor-pointer active:opacity-50"
-                                        href={`/dashboard/applications/${application.id}/edit`}>
-                                        <EditIcon/>
-                                    </Link>
-                                </Tooltip>
-                                <Tooltip color="danger" content="Delete user">
-                                    <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                                        <DeleteIcon/>
-                                    </span>
-                                </Tooltip>
+                                <EditButton id={application.id}/>
+                                <DeleteButton id={application.id}/>
                             </div>
                         </TableCell>
                     </TableRow>

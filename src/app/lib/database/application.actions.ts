@@ -140,6 +140,18 @@ export async function updateApplication(id: string, prevState: ApplicationFormSt
     redirect('/dashboard/applications');
 }
 
+export async function deleteApplication(id: string): Promise<{message: string}> {
+    console.log('deleting', id)
+    try {
+        await sql`DELETE FROM applications WHERE id = ${id}`;
+        revalidatePath('/dashboard/applications');
+        return { message: 'Deleted Application.' };
+    }catch (error) {
+        return {
+            message: 'Database Error: Failed to Delete Application.'
+        };
+    }
+}
 const validateApplicationForm = (formData: FormData): SafeParseSuccess<any> | SafeParseError<any> => {
     return ApplicationForm.safeParse({
         companyName: formData.get('companyName'),

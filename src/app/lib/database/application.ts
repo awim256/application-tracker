@@ -21,7 +21,6 @@ export async function fetchApplications(): Promise<Application[]> {
 const ITEMS_PER_PAGE: number = 6;
 
 export async function fetchFilteredApplications(query: string, currentPage: number): Promise<Application[]> {
-    console.log(currentPage)
     noStore();
 
     const offset: number = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -48,8 +47,6 @@ export async function fetchFilteredApplications(query: string, currentPage: numb
 
 export async function fetchApplicationPages(query: string): Promise<number> {
     noStore();
-
-    console.log(query);
 
     try {
         const data: QueryResult = await sql`SELECT COUNT(*)
