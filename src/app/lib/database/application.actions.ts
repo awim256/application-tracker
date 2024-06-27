@@ -3,7 +3,7 @@
 import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 import {sql} from "@vercel/postgres";
-import {z} from 'zod';
+import {SafeParseError, SafeParseSuccess, z} from 'zod';
 import {ApplicationStatus, WorkType} from "@/app/lib/model/application";
 
 export type ApplicationFormState = {
@@ -54,20 +54,10 @@ const FormSchema = z.object({
     updated_at: z.string().pipe(z.coerce.date()),
 });
 
-const CreateApplication = FormSchema.omit({id: true, created_at: true, updated_at: true});
+const ApplicationForm = FormSchema.omit({id: true, created_at: true, updated_at: true});
 
-export async function createApplication(prevState: ApplicationFormState, formData: FormData) {
-    const validatedFields = CreateApplication.safeParse({
-        companyName: formData.get('companyName'),
-        position: formData.get('position'),
-        applicationDate: formData.get('applicationDate'),
-        status: formData.get('status'),
-        notes: formData.get('notes'),
-        followUpDate: formData.get('followUpDate'),
-        location: formData.get('location'),
-        workType: formData.get('workType'),
-        applicationLink: formData.get('applicationLink'),
-    });
+export async function createApplication(prevState: ApplicationFormState, formData: FormData): Promise<any> {
+    const validatedFields: SafeParseSuccess<any> | SafeParseError<any> = validateApplicationForm(formData);
 
     if (!validatedFields.success) {
         return {
@@ -88,19 +78,78 @@ export async function createApplication(prevState: ApplicationFormState, formDat
         applicationLink
     } = validatedFields.data;
 
-    const created_at: string = new Date().toISOString().split('T')[0];
-    const updated_at: string = new Date().toISOString().split('T')[0];
-
     try {
         await sql`
       INSERT INTO applications (company_name, position, application_date, status, notes, follow_up_date, location, work_type, application_link)
       VALUES (${companyName}, ${position}, ${applicationDate}, ${status}, ${notes}, ${followUpDate}, ${location}, ${workType}, ${applicationLink})
     `;
-
     } catch (error) {
         return {message: 'Database Error: Failed to Create Invoice.',}
     }
 
     revalidatePath('/dashboard/applications');
     redirect('/dashboard/applications');
+}
+
+export async function updateApplication(id: string, prevState: ApplicationFormState, formData: FormData): Promise<any> {
+    const validatedFields: SafeParseSuccess<any> | SafeParseError<any> = validateApplicationForm(formData);
+
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            message: 'Missing Fields. Failed to Update Invoice.'
+        };
+    }
+
+    const {
+        companyName,
+        position,
+        applicationDate,
+        status,
+        notes,
+        followUpDate,
+        location,
+        workType,
+        applicationLink
+    } = validatedFields.data;
+
+
+    try {
+        await sql`
+    UPDATE applications
+    SET
+     company_name = ${companyName},
+     position = ${position},
+     application_date = ${applicationDate},
+     status = ${status},
+     notes = ${notes},
+     follow_up_date = ${followUpDate},
+     location = ${location},
+     work_type = ${workType},
+     application_link = ${applicationLink},
+     updated_at = CURRENT_TIMESTAMP
+    WHERE id = ${id}
+  `;
+    } catch (error) {
+        return {
+            message: `Database Error: Failed to Update Application. ${error}`
+        };
+    }
+
+    revalidatePath('/dashboard/applications');
+    redirect('/dashboard/applications');
+}
+
+const validateApplicationForm = (formData: FormData): SafeParseSuccess<any> | SafeParseError<any> => {
+    return ApplicationForm.safeParse({
+        companyName: formData.get('companyName'),
+        position: formData.get('position'),
+        applicationDate: formData.get('applicationDate'),
+        status: formData.get('status'),
+        notes: formData.get('notes'),
+        followUpDate: formData.get('followUpDate'),
+        location: formData.get('location'),
+        workType: formData.get('workType'),
+        applicationLink: formData.get('applicationLink'),
+    });
 }

@@ -66,3 +66,17 @@ export async function fetchApplicationPages(query: string): Promise<number> {
         throw new Error('Failed to fetch application pages.');
     }
 }
+
+export async function fetchApplicationById(id: string): Promise<Application> {
+    noStore();
+
+    try {
+        const data: QueryResult<Application> = await sql<Application>`
+        SELECT * FROM applications 
+        WHERE id = ${id}`;
+        return data.rows[0];
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch application data.');
+    }
+}
