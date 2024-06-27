@@ -6,15 +6,12 @@ import {Bars3Icon, UserCircleIcon,} from '@heroicons/react/24/outline'
 import {ChevronDownIcon} from '@heroicons/react/20/solid'
 import SidebarDesktop from "@/ui/components/sidebar/sidebar-desktop";
 import SidebarMobile from "@/ui/components/sidebar/sidebar-mobile";
+import clsx from "clsx";
 
 const userNavigation = [
     {name: 'Your profile', href: '#'},
     {name: 'Sign out', href: '#'},
 ]
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
 
 export default function Sidebar() {
     const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -60,10 +57,8 @@ export default function Sidebar() {
                                                 {({focus}) => (
                                                     <a
                                                         href={item.href}
-                                                        className={classNames(
-                                                            focus ? 'bg-gray-50' : '',
-                                                            'block px-3 py-1 text-sm leading-6 text-gray-900',
-                                                        )}
+                                                        className={clsx('block px-3 py-1 text-sm leading-6 text-gray-900',
+                                                            {'bg-gray-50': focus})}
                                                     >
                                                         {item.name}
                                                     </a>
