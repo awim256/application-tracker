@@ -53,7 +53,7 @@ export default function ApplicationTable({
                     <TableRow key={application.id}>
                         <TableCell>{application.company_name}</TableCell>
                         <TableCell>
-                            <Link href={application.application_link} target="_blank">
+                            <Link href={application?.application_link!} target="_blank">
                                 {application.position}
                             </Link>
                         </TableCell>

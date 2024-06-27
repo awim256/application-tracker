@@ -4,14 +4,15 @@ import {SearchIcon} from "@nextui-org/shared-icons";
 import {Input} from "@nextui-org/input";
 import {ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams} from "next/navigation";
 import {DebouncedState, useDebouncedCallback} from "use-debounce";
+import {ChangeEvent} from "react";
 
 export default function Search({placeholder}: { placeholder: string }) {
     const searchParams: ReadonlyURLSearchParams = useSearchParams();
     const pathname: string = usePathname();
     const {replace} = useRouter();
 
-    const handleSearch: DebouncedState<any> = useDebouncedCallback((event): void => {
-        const term = event.target.value;
+    const handleSearch: DebouncedState<any> = useDebouncedCallback((event: ChangeEvent<HTMLInputElement>): void => {
+        const term: string = event.target.value;
         const params: URLSearchParams = new URLSearchParams(searchParams);
         params.set('page', '1');
         term ? params.set('query', term) : params.delete('query');
