@@ -87,7 +87,7 @@ export async function createApplication(prevState: ApplicationFormState, formDat
         return {message: 'Database Error: Failed to Create Invoice.',}
     }
 
-    revalidatePath('/dashboard/applications');
+    revalidatePath('/(DashboardLayout)/applications');
     redirect('/dashboard/applications');
 }
 
@@ -136,7 +136,7 @@ export async function updateApplication(id: string, prevState: ApplicationFormSt
         };
     }
 
-    revalidatePath('/dashboard/applications');
+    revalidatePath('/(DashboardLayout)/applications');
     redirect('/dashboard/applications');
 }
 
@@ -144,7 +144,7 @@ export async function deleteApplication(id: string): Promise<{message: string}> 
     console.log('deleting', id)
     try {
         await sql`DELETE FROM applications WHERE id = ${id}`;
-        revalidatePath('/dashboard/applications');
+        revalidatePath('/(DashboardLayout)/applications');
         return { message: 'Deleted Application.' };
     }catch (error) {
         return {

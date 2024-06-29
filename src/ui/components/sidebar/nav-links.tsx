@@ -12,8 +12,8 @@ interface NavLink {
 }
 
 const links: NavLink[] = [
-    {name: 'Home', icon: HomeIcon, href: '/dashboard'},
-    {name: 'Applications', icon: InboxStackIcon, href: '/dashboard/applications'},
+    {name: 'Home', icon: HomeIcon, href: '/'},
+    {name: 'Applications', icon: InboxStackIcon, href: '/applications'},
     {name: 'Reports', icon: ChartBarIcon, href: '#'},
 ];
 
