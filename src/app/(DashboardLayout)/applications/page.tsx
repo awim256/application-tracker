@@ -19,15 +19,13 @@ export default async function Page({searchParams}: {
 
     return (
         <div className="w-full">
-            <div className="flex w-full items-center justify-between">
-                <h1 className='text-2xl'>Applications</h1>
-            </div>
-            <div className="my-4 flex items-center justify-between gap-2 md:mt-8">
+            <h1 className='text-2xl'>Applications</h1>
+            <div className="my-4 flex md:flex-row md:items-center justify-between gap-2 md:mt-8">
                 <div className="w-1/2">
                     <Search placeholder="Filter by company"/>
                 </div>
                 <Button
-                    href="/dashboard/applications/new"
+                    href="/applications/new"
                     as={Link}
                     color="primary"
                     variant="solid"

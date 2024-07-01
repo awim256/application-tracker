@@ -139,7 +139,7 @@ export default function EditApplicationForm({application}: { application: Applic
                 <div className="mt-6 flex justify-end gap-4">
                     <Button
                         as={Link}
-                        href="/dashboard/applications"
+                        href="/applications"
                         color="default"
                         variant="bordered"
                     >
