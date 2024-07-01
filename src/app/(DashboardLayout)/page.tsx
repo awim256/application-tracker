@@ -1,15 +1,11 @@
-import TotalApplications from "@/app/(DashboardLayout)/components/dashboard/total-applications";
-import GhostedApplications from "@/app/(DashboardLayout)/components/dashboard/ghosted-applications";
-import ApplicationOverview from "@/app/(DashboardLayout)/components/dashboard/application-overview";
+import StatsCard from "@/app/(DashboardLayout)/components/dashboard/stats-card";
 
 export default function Page() {
     return (
-        <div className='grid grid-cols-12 space-x-3'>
-            <div className="cols-span-12 lg:col-span-8">
-            <ApplicationOverview />
+        <div className="grid col-span-12 gap-4">
+            <div className='col-span-12'>
+                <StatsCard/>
             </div>
-            <TotalApplications />
-            <GhostedApplications/>
         </div>
     )
 }

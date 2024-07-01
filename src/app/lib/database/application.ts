@@ -2,7 +2,7 @@
 
 import {QueryResult, sql} from '@vercel/postgres';
 import {unstable_noStore as noStore} from 'next/cache';
-import {Application} from "@/app/lib/model/application";
+import {Application, ApplicationStatus} from "@/app/lib/model/application";
 
 export async function fetchApplications(): Promise<Application[]> {
     noStore();
@@ -75,5 +75,65 @@ export async function fetchApplicationById(id: string): Promise<Application> {
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch application data.');
+    }
+}
+
+export async function fetchTotalApplicationCount(): Promise<number> {
+    noStore();
+
+    try {
+        const data: QueryResult = await sql`SELECT COUNT(*) FROM applications`;
+        return data.rows[0].count;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch total application count.');
+    }
+}
+
+export async function fetchRecentlySubmittedApplicationCount(): Promise<number> {
+    noStore();
+
+    try {
+        const data: QueryResult = await sql`SELECT COUNT(*) 
+           FROM applications
+           WHERE status = 'Submitted' 
+           AND created_at > NOW() - INTERVAL '7 days'
+        `;
+        return data.rows[0].count;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch recently submitted application count.');
+    }
+}
+
+export async function fetchRejectedApplicationCount(): Promise<number> {
+    noStore();
+
+    try {
+        const data: QueryResult = await sql`SELECT COUNT(*) 
+           FROM applications
+           WHERE UPPER(status) = UPPER(${ApplicationStatus.REJECTED});
+        `;
+        return data.rows[0].count;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch rejected application count.');
+    }
+}
+
+export async function fetchGhostedApplicationCount(): Promise<number> {
+    noStore();
+
+    try {
+        const data: QueryResult = await sql`SELECT COUNT(*) 
+           FROM applications
+           WHERE UPPER(status) != UPPER(${ApplicationStatus.REJECTED})
+           AND UPPER(status) != UPPER(${ApplicationStatus.DECLINED})
+           AND created_at > NOW() - INTERVAL '30 days'
+        `;
+        return data.rows[0].count;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch ghosted application count.');
     }
 }

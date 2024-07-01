@@ -23,13 +23,11 @@ export default function ApplicationOverview () {
 
 
   return (
-      <Card>
-        <div>
-          <div id="chart">
+      <Card className="p-5">
+          <div id="">
             <Chart options={state.options} series={state.series} type="bar" height={350}/>
           </div>
           <div id="html-dist"></div>
-        </div>
       </Card>
   );
 }
