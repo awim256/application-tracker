@@ -88,7 +88,7 @@ export async function createApplication(prevState: ApplicationFormState, formDat
     }
 
     revalidatePath('/(DashboardLayout)/applications');
-    redirect('/dashboard/applications');
+    redirect('/applications');
 }
 
 export async function updateApplication(id: string, prevState: ApplicationFormState, formData: FormData): Promise<any> {

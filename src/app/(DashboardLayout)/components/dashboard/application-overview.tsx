@@ -1,33 +1,29 @@
-"use client";
-
 import {Card} from "@nextui-org/card";
-import Chart from 'react-apexcharts'
+import {fetchApplicationsOverTwoWeeks} from "@/app/lib/database/application";
+import {Application} from "@/app/lib/model/application";
+import BarChart from "@/ui/dashboard/bar-chart";
+
+export default async function ApplicationOverview() {
+    const applications: Application[] = await fetchApplicationsOverTwoWeeks();
+    const mappedData: Map<string, number> = new Map<string, number>();
+
+    applications.forEach((application: Application) => {
+        const date: string = application.created_at.toISOString().split('T')[0];
+        const count: number = mappedData.get(date) || 0;
+        mappedData.set(date, count + 1);
+    });
+
+    const series: ApexAxisChartSeries = [
+        {
+            data: Array.from(mappedData, ([date, count]) => ({x: date, y: count})),
+            name: 'Applications'
+        }
+    ];
 
 
-export default function ApplicationOverview () {
-
-  const state = {
-    options: {
-      chart: {
-        id: 'apexchart-example'
-      },
-      xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-      }
-    },
-    series: [{
-      name: 'series-1',
-      data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
-    }]
-  }
-
-
-  return (
-      <Card className="p-5">
-          <div id="">
-            <Chart options={state.options} series={state.series} type="bar" height={350}/>
-          </div>
-          <div id="html-dist"></div>
-      </Card>
-  );
+    return (
+        <Card className="p-5">
+           <BarChart series={series} title='Applications over the last two weeks'/>
+        </Card>
+    );
 }

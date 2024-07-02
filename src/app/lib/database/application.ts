@@ -17,7 +17,6 @@ export async function fetchApplications(): Promise<Application[]> {
     }
 }
 
-
 const ITEMS_PER_PAGE: number = 6;
 
 export async function fetchFilteredApplications(query: string, currentPage: number): Promise<Application[]> {
@@ -78,62 +77,63 @@ export async function fetchApplicationById(id: string): Promise<Application> {
     }
 }
 
-export async function fetchTotalApplicationCount(): Promise<number> {
+export async function fetchApplicationsOverTwoWeeks(): Promise<Application[]> {
     noStore();
 
     try {
-        const data: QueryResult = await sql`SELECT COUNT(*) FROM applications`;
-        return data.rows[0].count;
+        console.log('Fetching application data...');
+        const data: QueryResult<Application> = await sql<Application>`
+            SELECT * FROM applications
+            WHERE created_at > NOW() - INTERVAL '14 days'           
+            `;
+        return data.rows;
     } catch (error) {
         console.error('Database Error:', error);
-        throw new Error('Failed to fetch total application count.');
+        throw new Error('Failed to fetch application data.');
     }
 }
 
-export async function fetchRecentlySubmittedApplicationCount(): Promise<number> {
+export async function fetchStats(): Promise<any> {
     noStore();
 
     try {
-        const data: QueryResult = await sql`SELECT COUNT(*) 
-           FROM applications
-           WHERE status = 'Submitted' 
-           AND created_at > NOW() - INTERVAL '7 days'
-        `;
-        return data.rows[0].count;
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch recently submitted application count.');
-    }
-}
+        const applicationCountPromise: Promise<QueryResult> = sql`SELECT COUNT(*) FROM applications`;
 
-export async function fetchRejectedApplicationCount(): Promise<number> {
-    noStore();
+        const applicationCountOverLast7DaysPromise: Promise<QueryResult> = sql`SELECT COUNT(*) 
+            FROM applications 
+            WHERE status = 'Submitted' 
+            AND created_at > NOW() - INTERVAL '7 days'`;
 
-    try {
-        const data: QueryResult = await sql`SELECT COUNT(*) 
-           FROM applications
-           WHERE UPPER(status) = UPPER(${ApplicationStatus.REJECTED});
-        `;
-        return data.rows[0].count;
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch rejected application count.');
-    }
-}
+        const rejectedApplicationCountPromise: Promise<QueryResult> = sql`SELECT COUNT(*)
+            FROM applications 
+            WHERE UPPER(status) = UPPER(${ApplicationStatus.REJECTED})`
 
-export async function fetchGhostedApplicationCount(): Promise<number> {
-    noStore();
-
-    try {
-        const data: QueryResult = await sql`SELECT COUNT(*) 
+        const ghostedApplicationCountPromise: Promise<QueryResult> = sql`SELECT COUNT(*) 
            FROM applications
            WHERE UPPER(status) != UPPER(${ApplicationStatus.REJECTED})
            AND UPPER(status) != UPPER(${ApplicationStatus.DECLINED})
-           AND created_at > NOW() - INTERVAL '30 days'
-        `;
-        return data.rows[0].count;
+           AND created_at > NOW() - INTERVAL '14 days'`;
+
+        const data = await Promise.all([
+            applicationCountPromise,
+            applicationCountOverLast7DaysPromise,
+            rejectedApplicationCountPromise,
+            ghostedApplicationCountPromise,
+        ]);
+
+        const applicationCount: number = Number(data[0].rows[0].count ?? '0');
+        const applicationCountOverLast7Days: number = Number(data[1].rows[0].count ?? '0');
+        const rejectedApplicationCount: number = Number(data[2].rows[0].paid ?? '0');
+        const ghostedApplicationCount: number = Number(data[2].rows[0].pending ?? '0');
+
+        return {
+            applicationCount,
+            applicationCountOverLast7Days,
+            rejectedApplicationCount,
+            ghostedApplicationCount
+        };
     } catch (error) {
         console.error('Database Error:', error);
-        throw new Error('Failed to fetch ghosted application count.');
+        throw new Error('Failed to fetch application stats.');
     }
 }
