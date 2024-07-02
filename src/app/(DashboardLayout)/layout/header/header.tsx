@@ -4,10 +4,10 @@ import {Bars3Icon, BellIcon} from "@heroicons/react/24/outline";
 import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/react";
 import clsx from "clsx";
+import {SignOutButton} from "@clerk/nextjs";
 
 const userNavigation = [
-    { name: 'Your profile', href: '#' },
-    { name: 'Sign out', href: '#' },
+    {name: 'Your profile', href: '#'},
 ]
 
 export default function Header({handleMenuClick}: { handleMenuClick: (b: boolean) => void }) {
@@ -74,6 +74,15 @@ export default function Header({handleMenuClick}: { handleMenuClick: (b: boolean
                                         )}
                                     </MenuItem>
                                 ))}
+
+                                <MenuItem>
+                                    {({focus}) => (
+                                        <div
+                                            className={clsx('block px-3 py-1 text-sm leading-6 text-gray-900', {'!bg-gray-50': focus})}>
+                                            <SignOutButton redirectUrl='/sign-in'>Sign out</SignOutButton>
+                                        </div>
+                                    )}
+                                </MenuItem>
                             </MenuItems>
                         </Menu>
                     </div>

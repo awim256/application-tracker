@@ -10,6 +10,8 @@
     "seed": "node -r dotenv/config ./scripts/seed.js"
   },
   "dependencies": {
+    "@clerk/elements": "^0.10.0",
+    "@clerk/nextjs": "^5.2.0",
     "@headlessui/react": "^2.1.1",
     "@heroicons/react": "^2.1.4",
     "@nextui-org/react": "^2.4.2",

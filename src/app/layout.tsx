@@ -3,6 +3,7 @@ import {Inter} from "next/font/google";
 import "./globals.css";
 import {Providers} from "@/app/providers";
 import {NextFont} from "next/dist/compiled/@next/font";
+import {ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/nextjs";
 
 const inter: NextFont = Inter({subsets: ["latin"]});
 
@@ -20,12 +21,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className='light'>
+        <ClerkProvider>
+            <html lang="en" className='light'>
             <body className={`${inter.className}`}>
-                <Providers>
-                 {children}
-              </Providers>
+            <Providers>
+                {children}
+            </Providers>
             </body>
-        </html>
+            </html>
+        </ClerkProvider>
     );
 }
