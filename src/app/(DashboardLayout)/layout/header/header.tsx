@@ -24,6 +24,13 @@ export default function Header({handleMenuClick}: { handleMenuClick: (b: boolean
                 {/* Separator */}
                 <div className="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true"/>
 
+                <div className="flex h-16 shrink-0 items-center lg:hidden">
+                    <img width="32" height="32" src="https://img.icons8.com/pulsar-line/48/circle-thin.png"
+                         alt="circle-thin"/>
+                    <h1 className="text-xl font-semibold leading-6">Application Tracker</h1>
+                </div>
+
+
                 <div className="flex flex-1 gap-x-4 w-full justify-end lg:gap-x-6">
 
                     <div className="flex items-center gap-x-4 lg:gap-x-6">
@@ -60,8 +67,8 @@ export default function Header({handleMenuClick}: { handleMenuClick: (b: boolean
                                         {({focus}) => (
                                             <a
                                                 href={item.href}
-                                                className={clsx('block px-3 py-1 text-sm leading-6 text-gray-900', {'!bg-gray-50' : focus})}
-                                                    >
+                                                className={clsx('block px-3 py-1 text-sm leading-6 text-gray-900', {'!bg-gray-50': focus})}
+                                            >
                                                 {item.name}
                                             </a>
                                         )}

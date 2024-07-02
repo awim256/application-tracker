@@ -5,7 +5,9 @@ export default function Sidebar() {
     return (
         <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
             <div className="flex h-16 shrink-0 items-center">
-                <h1>Application Tracker</h1>
+                <img width="32" height="32" src="https://img.icons8.com/pulsar-line/48/circle-thin.png"
+                     alt="circle-thin"/>
+                <h1 className="text-xl font-semibold leading-6">Application Tracker</h1>
             </div>
             <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
