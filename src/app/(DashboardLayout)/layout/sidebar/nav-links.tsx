@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import {usePathname} from "next/navigation";
-import {ChartBarIcon, HomeIcon, InboxStackIcon} from "@heroicons/react/24/outline";
+import {HomeIcon, InboxStackIcon} from "@heroicons/react/24/outline";
 
 interface NavLink {
     name: string;
@@ -14,7 +14,6 @@ interface NavLink {
 const links: NavLink[] = [
     {name: 'Home', icon: HomeIcon, href: '/'},
     {name: 'Applications', icon: InboxStackIcon, href: '/applications'},
-    {name: 'Reports', icon: ChartBarIcon, href: '#'},
 ];
 
 export default function NavLinks() {

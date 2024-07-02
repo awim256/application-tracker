@@ -1,9 +1,4 @@
-import {
-    fetchGhostedApplicationCount,
-    fetchRecentlySubmittedApplicationCount,
-    fetchRejectedApplicationCount, fetchStats,
-    fetchTotalApplicationCount
-} from "@/app/lib/database/application";
+import {fetchStats} from "@/app/lib/database/application";
 
 export default async function StatsCard() {
     const {

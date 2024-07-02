@@ -124,7 +124,7 @@ export async function fetchStats(): Promise<any> {
         const applicationCount: number = Number(data[0].rows[0].count ?? '0');
         const applicationCountOverLast7Days: number = Number(data[1].rows[0].count ?? '0');
         const rejectedApplicationCount: number = Number(data[2].rows[0].paid ?? '0');
-        const ghostedApplicationCount: number = Number(data[2].rows[0].pending ?? '0');
+        const ghostedApplicationCount: number = Number(data[3].rows[0].pending ?? '0');
 
         return {
             applicationCount,
