@@ -18,8 +18,6 @@ export default function BarChart({series, title}: { series: ApexAxisChartSeries,
         },
     }
 
-    console.log(series)
-
     return (
         <Chart options={options} series={series} height={350} type="bar"/>
     )

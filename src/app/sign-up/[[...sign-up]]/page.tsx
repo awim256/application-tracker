@@ -23,7 +23,7 @@ export default function Example() {
                     </h2>
                 </div>
 
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+                <div className="mt-10 px-4 sm:mx-auto sm:w-full sm:max-w-[480px]">
                     <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
                         <SignUp.Root>
                             <SignUp.Step name="start" className="space-y-6">

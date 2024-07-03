@@ -141,7 +141,7 @@ export async function updateApplication(id: string, prevState: ApplicationFormSt
 }
 
 export async function deleteApplication(id: string): Promise<{message: string}> {
-    console.log('deleting', id)
+
     try {
         await sql`DELETE FROM applications WHERE id = ${id}`;
         revalidatePath('/(DashboardLayout)/applications');

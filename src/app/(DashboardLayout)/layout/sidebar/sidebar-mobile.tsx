@@ -28,7 +28,6 @@ export default function SidebarMobile({
                             </button>
                         </div>
                     </TransitionChild>
-                    {/* Sidebar component, swap this element with another sidebar if you like */}
                     <Sidebar/>
                 </DialogPanel>
             </div>

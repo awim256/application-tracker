@@ -43,7 +43,6 @@ export default function EditApplicationForm({application}: { application: Applic
                                name="companyName"
                                label="Company"
                                isRequired
-                               onChange={(e) => { console.log(e.target.value); }}
                                defaultValue={application.company_name}
                                isInvalid={!!state?.errors?.companyName}
                                errorMessage={state?.errors?.companyName}
