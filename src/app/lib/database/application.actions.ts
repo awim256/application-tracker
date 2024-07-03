@@ -5,6 +5,7 @@ import {redirect} from "next/navigation";
 import {sql} from "@vercel/postgres";
 import {SafeParseError, SafeParseSuccess, z} from 'zod';
 import {ApplicationStatus, WorkType} from "@/app/lib/model/application";
+import {auth} from "@clerk/nextjs/server";
 
 export type ApplicationFormState = {
     errors?: {
@@ -56,6 +57,9 @@ const FormSchema = z.object({
 
 const ApplicationForm = FormSchema.omit({id: true, created_at: true, updated_at: true});
 
+const userMetaData = auth();
+const userId: string | null = userMetaData.userId;
+
 export async function createApplication(prevState: ApplicationFormState, formData: FormData): Promise<any> {
     const validatedFields: SafeParseSuccess<any> | SafeParseError<any> = validateApplicationForm(formData);
 
@@ -80,8 +84,8 @@ export async function createApplication(prevState: ApplicationFormState, formDat
 
     try {
         await sql`
-      INSERT INTO applications (company_name, position, application_date, status, notes, follow_up_date, location, work_type, application_link)
-      VALUES (${companyName}, ${position}, ${applicationDate}, ${status}, ${notes}, ${followUpDate}, ${location}, ${workType}, ${applicationLink})
+      INSERT INTO applications (user_id, company_name, position, application_date, status, notes, follow_up_date, location, work_type, application_link)
+      VALUES (${userId}, ${companyName}, ${position}, ${applicationDate}, ${status}, ${notes}, ${followUpDate}, ${location}, ${workType}, ${applicationLink})
     `;
     } catch (error) {
         return {message: 'Database Error: Failed to Create Invoice.',}

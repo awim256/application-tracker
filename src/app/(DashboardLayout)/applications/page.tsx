@@ -1,6 +1,5 @@
 import ApplicationTable from "@/ui/applications/application-table";
-import {Application} from "@/app/lib/model/application";
-import {fetchApplicationPages, fetchApplications} from "@/app/lib/database/application";
+import {fetchApplicationPages} from "@/app/lib/database/application";
 import {Button} from "@nextui-org/button";
 import Link from "next/link";
 import Search from "@/ui/applications/search";

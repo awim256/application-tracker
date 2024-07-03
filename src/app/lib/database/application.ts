@@ -3,17 +3,10 @@
 import {QueryResult, sql} from '@vercel/postgres';
 import {unstable_noStore as noStore} from 'next/cache';
 import {Application, ApplicationStatus} from "@/app/lib/model/application";
+import {auth} from "@clerk/nextjs/server";
 
-export async function fetchApplications(): Promise<Application[]> {
-    noStore();
-
-    try {
-        const data: QueryResult<Application> = await sql<Application>`SELECT * FROM applications`;
-        return data.rows;
-    } catch (error) {
-        throw new Error(`Failed to fetch application data. ${error}`);
-    }
-}
+const userMetaData = auth();
+const userId: string | null = userMetaData.userId;
 
 const ITEMS_PER_PAGE: number = 6;
 
@@ -25,14 +18,16 @@ export async function fetchFilteredApplications(query: string, currentPage: numb
     try {
         const data: QueryResult<Application> = await sql<Application>`
         SELECT * FROM applications
-        WHERE 
+        WHERE
+            user_id = ${userId} AND 
+            (
             company_name ILIKE ${`%${query}%`} OR
             position ILIKE ${`%${query}%`} OR
             status ILIKE ${`%${query}%`}
+            )     
         ORDER BY created_at DESC
         LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
    `;
-
 
         return data.rows;
     } catch (error) {
@@ -67,7 +62,9 @@ export async function fetchApplicationById(id: string): Promise<Application> {
     try {
         const data: QueryResult<Application> = await sql<Application>`
         SELECT * FROM applications 
-        WHERE id = ${id}`;
+        WHERE id = ${id}
+        AND user_id = ${userId}
+        `;
         return data.rows[0];
     } catch (error) {
         throw new Error(`Failed to fetch application data. ${error}`);
@@ -81,7 +78,8 @@ export async function fetchApplicationsOverTwoWeeks(): Promise<Application[]> {
         console.log('Fetching application data...');
         const data: QueryResult<Application> = await sql<Application>`
             SELECT * FROM applications
-            WHERE created_at > NOW() - INTERVAL '14 days'           
+            WHERE created_at > NOW() - INTERVAL '14 days'      
+            AND user_id = ${userId}     
             `;
         return data.rows;
     } catch (error) {
@@ -93,21 +91,29 @@ export async function fetchApplicationsOverTwoWeeks(): Promise<Application[]> {
 export async function fetchStats(): Promise<any> {
     noStore();
 
+    console.log('userid', userId)
+
     try {
-        const applicationCountPromise: Promise<QueryResult> = sql`SELECT COUNT(*) FROM applications`;
+        const applicationCountPromise: Promise<QueryResult> = sql`SELECT COUNT(*) 
+            FROM applications
+            WHERE user_id = ${userId}
+            `;
 
         const applicationCountOverLast7DaysPromise: Promise<QueryResult> = sql`SELECT COUNT(*) 
             FROM applications 
             WHERE status = 'Submitted' 
+            AND user_id = ${userId}
             AND created_at > NOW() - INTERVAL '7 days'`;
 
         const rejectedApplicationCountPromise: Promise<QueryResult> = sql`SELECT COUNT(*)
             FROM applications 
-            WHERE UPPER(status) = UPPER(${ApplicationStatus.REJECTED})`
+            WHERE user_id = ${userId} 
+            AND UPPER(status) = UPPER(${ApplicationStatus.REJECTED})`
 
         const ghostedApplicationCountPromise: Promise<QueryResult> = sql`SELECT COUNT(*) 
            FROM applications
-           WHERE UPPER(status) != UPPER(${ApplicationStatus.REJECTED})
+           WHERE user_id = ${userId}
+           AND UPPER(status) != UPPER(${ApplicationStatus.REJECTED})
            AND UPPER(status) != UPPER(${ApplicationStatus.DECLINED})
            AND created_at > NOW() - INTERVAL '14 days'`;
 

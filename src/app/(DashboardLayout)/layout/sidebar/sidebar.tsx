@@ -16,7 +16,7 @@ export default function Sidebar() {
                             <NavLinks/>
                         </ul>
                     </li>
-                    <li className="mt-auto">
+                    <li className="hidden mt-auto">
                         <a
                             href="#"
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-500 hover:bg-gray-500 hover:text-white"
