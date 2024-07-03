@@ -18,7 +18,6 @@ export default function ApplicationTable({
     const [applications, setApplications] = useState<Application[]>([]);
 
     useEffect(() => {
-        console.log('fetching applications');
         const filterApplications = async (): Promise<void> => {
             try {
                 const filteredApplications: Application[] = await fetchFilteredApplications(query, currentPage);

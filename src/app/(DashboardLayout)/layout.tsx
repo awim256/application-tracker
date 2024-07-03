@@ -14,7 +14,7 @@ export default function Layout({children}: { children: React.ReactNode }) {
     return (
         <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
             <Sidebar isMenuOpen={isMenuOpen} handleMenuClick={handleMenuClick} />
-            <div className="flex flex-col flex-1 pb-16 bg-transparent">
+            <div className="flex flex-col flex-1 bg-transparent">
                 <Header handleMenuClick={handleMenuClick}/>
                 <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
                     {children}
