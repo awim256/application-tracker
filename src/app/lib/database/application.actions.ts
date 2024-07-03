@@ -137,7 +137,7 @@ export async function updateApplication(id: string, prevState: ApplicationFormSt
     }
 
     revalidatePath('/(DashboardLayout)/applications');
-    redirect('/dashboard/applications');
+    redirect('/applications');
 }
 
 export async function deleteApplication(id: string): Promise<{message: string}> {
