@@ -10,11 +10,14 @@ export default function Example() {
         <>
             <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                    <img
-                        className="mx-auto h-10 w-auto"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                        alt="Your Company"
-                    />
+                    <div className="p-5">
+                        <img
+                            className="mx-auto h-10 w-auto"
+                            src="https://img.icons8.com/pulsar-line/48/circle-thin.png"
+                            alt="Application Tracker"
+                        />
+                        <h1 className="text-xl text-center font-semibold leading-6">Application Tracker</h1>
+                    </div>
                     <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                         Create your account
                     </h2>
@@ -27,8 +30,9 @@ export default function Example() {
 
                                 <Clerk.Field name="emailAddress">
                                     <Clerk.Label
-                                        className="block text-sm font-medium leading-6 text-gray-900">Email
-                                        address</Clerk.Label>
+                                        className="block text-sm font-medium leading-6 text-gray-900">
+                                        Email address
+                                    </Clerk.Label>
                                     <div className="mt-2">
                                         <Clerk.Input
                                             className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
@@ -74,7 +78,7 @@ export default function Example() {
                                 </div>
                             </SignUp.Step>
 
-                            <p className="mt-10 text-sm text-gray-500">
+                            <p className="mt-10 text-sm text-center text-gray-500">
                                 Already registered?{' '}
                                 <Link href="/sign-in" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                                     Sign in
