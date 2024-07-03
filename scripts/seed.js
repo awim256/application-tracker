@@ -7,7 +7,7 @@ async function seedUsers(client) {
         await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
         // Create the "users" table if it doesn't exist
         const createTable = await client.sql`
-      CREATE TABLE IF NOT EXISTS users (
+        CREATE TABLE IF NOT EXISTS users (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email TEXT NOT NULL UNIQUE,
@@ -49,6 +49,7 @@ async function seedApplications(client) {
         const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS applications (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL, 
     company_name VARCHAR(255) NOT NULL,
     position VARCHAR(255) NOT NULL,
     application_date DATE NOT NULL,
@@ -69,8 +70,8 @@ async function seedApplications(client) {
         const insertedApplications = await Promise.all(
             applications.map(
                 (application) => client.sql`
-        INSERT INTO applications (company_name, position, application_date, status, notes, follow_up_date, location, work_type, application_link)
-        VALUES (${application.company_name}, ${application.position}, ${application.application_date}, ${application.status}, ${application.notes}, ${application.follow_up_date}, ${application.location}, ${application.work_type}, ${application.application_link})
+        INSERT INTO applications (user_id, company_name, position, application_date, status, notes, follow_up_date, location, work_type, application_link)
+        VALUES (${application.user_id}, ${application.company_name}, ${application.position}, ${application.application_date}, ${application.status}, ${application.notes}, ${application.follow_up_date}, ${application.location}, ${application.work_type}, ${application.application_link})
         ON CONFLICT (id) DO NOTHING;
       `,
             ),

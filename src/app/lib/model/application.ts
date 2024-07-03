@@ -1,5 +1,6 @@
 export interface Application {
     id: string,
+    user_id: string,
     company_name: string,
     position: string,
     application_date: Date,

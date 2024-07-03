@@ -8,12 +8,10 @@ export async function fetchApplications(): Promise<Application[]> {
     noStore();
 
     try {
-        console.log('Fetching application data...');
         const data: QueryResult<Application> = await sql<Application>`SELECT * FROM applications`;
         return data.rows;
     } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch application data.');
+        throw new Error('Failed to fetch application data.', error);
     }
 }
 
@@ -72,8 +70,7 @@ export async function fetchApplicationById(id: string): Promise<Application> {
         WHERE id = ${id}`;
         return data.rows[0];
     } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch application data.');
+        throw new Error('Failed to fetch application data.', error);
     }
 }
 

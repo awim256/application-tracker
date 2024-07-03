@@ -11,6 +11,7 @@ const users = [
 
 const applications = [
   {
+    user_id: 'user_2ii8YcYLx9uZi1MfgCGYXtTk7cx',
     company_name: 'Hootsuite',
     position: 'Senior Front-End Developer',
     application_date: '2024-06-01',
@@ -22,6 +23,7 @@ const applications = [
     application_link: 'https://hootsuite.com/careers/job-posting'
   },
   {
+    user_id: 'user_2ii8YcYLx9uZi1MfgCGYXtTk7cx',
     company_name: 'SAP',
     position: 'Developer',
     application_date: '2024-06-05',
@@ -33,6 +35,7 @@ const applications = [
     application_link: 'https://sap.com/careers/job-posting'
   },
   {
+    user_id: 'user_2ii8YcYLx9uZi1MfgCGYXtTk7cx',
     company_name: 'Lululemon',
     position: 'Senior Engineer',
     application_date: '2024-06-10',
@@ -44,6 +47,7 @@ const applications = [
     application_link: 'https://lululemon.com/careers/job-posting'
   },
   {
+    user_id: 'user_2ii8YcYLx9uZi1MfgCGYXtTk7cx',
     company_name: 'Mastercard',
     position: 'Software Engineer II',
     application_date: '2024-06-12',
@@ -55,6 +59,7 @@ const applications = [
     application_link: 'https://mastercard.com/careers/job-posting'
   },
   {
+    user_id: 'user_2ii8YcYLx9uZi1MfgCGYXtTk7cx',
     company_name: 'Cority',
     position: 'Senior Front-End Developer',
     application_date: '2024-06-15',
