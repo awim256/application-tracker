@@ -6,7 +6,7 @@ export default function Sidebar() {
     return (
         <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
             <div className="flex h-16 shrink-0 items-center">
-                <Image width="32" height="32" src="https://img.icons8.com/pulsar-line/48/circle-thin.png"
+                <Image width="32" height="32" src="/circle-thin.png"
                      alt="circle-thin"/>
                 <h1 className="text-xl font-semibold leading-6">Application Tracker</h1>
             </div>

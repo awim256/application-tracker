@@ -22,7 +22,7 @@ export default function Header({handleMenuClick}: { handleMenuClick: (b: boolean
                 <div className="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true"/>
 
                 <div className="flex h-16 shrink-0 items-center lg:hidden">
-                    <Image width="32" height="32" src="https://img.icons8.com/pulsar-line/48/circle-thin.png"
+                    <Image width="32" height="32" src="/circle-thin.png"
                          alt="circle-thin"/>
                     <h1 className="text-xl font-semibold leading-6">Application Tracker</h1>
                 </div>

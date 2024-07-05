@@ -12,8 +12,10 @@ export default function SignInPage() {
                 <div className="p-5">
                     <Image
                         className="mx-auto h-10 w-auto"
-                        src="https://img.icons8.com/pulsar-line/48/circle-thin.png"
+                        src="/circle-thin.png"
                         alt="Application Tracker"
+                        width={40}
+                        height={40}
                     />
                     <h1 className="text-xl text-center font-semibold leading-6">Application Tracker</h1>
                 </div>
