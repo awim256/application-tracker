@@ -108,7 +108,7 @@ export async function fetchStats(): Promise<any> {
 
         const applicationCountOverLast7DaysPromise: Promise<QueryResult> = sql`SELECT COUNT(*) 
             FROM applications 
-            WHERE status = 'Submitted' 
+            WHERE status = ${ApplicationStatus.APPLIED} 
             AND user_id = ${userId}
             AND created_at > NOW() - INTERVAL '7 days'`;
 
@@ -120,8 +120,8 @@ export async function fetchStats(): Promise<any> {
         const ghostedApplicationCountPromise: Promise<QueryResult> = sql`SELECT COUNT(*) 
            FROM applications
            WHERE user_id = ${userId}
-           AND UPPER(status) != UPPER(${ApplicationStatus.REJECTED})
-           AND UPPER(status) != UPPER(${ApplicationStatus.DECLINED})
+           AND status != ${ApplicationStatus.REJECTED}
+           AND status != ${ApplicationStatus.DECLINED}
            AND created_at > NOW() - INTERVAL '14 days'`;
 
         const data = await Promise.all([
@@ -133,8 +133,8 @@ export async function fetchStats(): Promise<any> {
 
         const applicationCount: number = Number(data[0].rows[0].count ?? '0');
         const applicationCountOverLast7Days: number = Number(data[1].rows[0].count ?? '0');
-        const rejectedApplicationCount: number = Number(data[2].rows[0].paid ?? '0');
-        const ghostedApplicationCount: number = Number(data[3].rows[0].pending ?? '0');
+        const rejectedApplicationCount: number = Number(data[2].rows[0].count ?? '0');
+        const ghostedApplicationCount: number = Number(data[3].rows[0].count ?? '0');
 
         return {
             applicationCount,
