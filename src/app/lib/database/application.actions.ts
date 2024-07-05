@@ -28,9 +28,9 @@ const FormSchema = z.object({
     applicationDate: z.string().refine(
         (dateString) => {
             const date = new Date(dateString);
-            return !isNaN(date.getTime()) && date < new Date();
+            return !isNaN(date.getTime());
         }, {
-            message: 'Application date cannot be in the future and must be a valid date.',
+            message: 'Application must be a valid date.',
         }
     ),
     status: z.nativeEnum(ApplicationStatus, {
@@ -40,9 +40,9 @@ const FormSchema = z.object({
     followUpDate: z.string().refine(
         (dateString) => {
             const date = new Date(dateString);
-            return !isNaN(date.getTime()) && date > new Date();
+            return !isNaN(date.getTime());
         }, {
-            message: 'Please enter a valid follow up date. Follow up date must be in the future.',
+            message: 'Follow up date must be a valid date.',
         }
     ),
     location: z.string().min(1, {message: 'Please enter a location.'}),
