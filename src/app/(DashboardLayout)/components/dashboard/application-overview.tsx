@@ -8,7 +8,7 @@ export default async function ApplicationOverview() {
     const mappedData: Map<string, number> = new Map<string, number>();
 
     applications.forEach((application: Application) => {
-        const date: string = application.created_at.toISOString().split('T')[0];
+        const date: string = application.application_date.toISOString().split('T')[0];
         const count: number = mappedData.get(date) || 0;
         mappedData.set(date, count + 1);
     });
