@@ -38,7 +38,7 @@ export default function Example() {
                                     </Clerk.Label>
                                     <div className="mt-2">
                                         <Clerk.Input
-                                            className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                                            className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"/>
                                         <Clerk.FieldError className="block text-red-500 text-sm"/>
                                     </div>
                                 </Clerk.Field>
@@ -48,13 +48,13 @@ export default function Example() {
                                         className="block text-sm font-medium leading-6 text-gray-900">Password</Clerk.Label>
                                     <div className="mt-2">
                                         <Clerk.Input
-                                            className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                                            className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"/>
                                         <Clerk.FieldError className="block text-red-500 text-sm"/>
                                     </div>
                                 </Clerk.Field>
 
                                 <SignUp.Action submit
-                                               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                               className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                                     Sign up
                                 </SignUp.Action>
 
@@ -83,7 +83,7 @@ export default function Example() {
 
                             <p className="mt-10 text-sm text-center text-gray-500">
                                 Already registered?{' '}
-                                <Link href="/sign-in" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                                <Link href="/sign-in" className="font-semibold leading-6 text-sky-600 hover:text-sky-500">
                                     Sign in
                                 </Link>
                             </p>
@@ -101,13 +101,13 @@ export default function Example() {
                                             Code</Clerk.Label>
                                         <div className="mt-2">
                                             <Clerk.Input
-                                                className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                                                className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"/>
                                             <Clerk.FieldError className="block text-red-500 text-sm"/>
                                         </div>
                                     </Clerk.Field>
 
                                     <SignUp.Action submit
-                                                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Verify</SignUp.Action>
+                                                   className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">Verify</SignUp.Action>
                                 </SignUp.Strategy>
                             </SignUp.Step>
                         </SignUp.Root>

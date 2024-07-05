@@ -42,7 +42,7 @@ const ViewProfile = () => {
                             <dd className="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
                                 <div className="text-gray-900">{user.fullName}</div>
                                 <button type="button"
-                                        className="font-semibold text-indigo-600 hover:text-indigo-500">
+                                        className="font-semibold text-sky-600 hover:text-sky-500">
                                     Update
                                 </button>
                             </dd>
@@ -57,7 +57,7 @@ const ViewProfile = () => {
                                     ))}
                                 </div>
                                 <button type="button"
-                                        className="font-semibold text-indigo-600 hover:text-indigo-500">
+                                        className="font-semibold text-sky-600 hover:text-sky-500">
                                     Update
                                 </button>
                             </dd>

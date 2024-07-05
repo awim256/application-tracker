@@ -39,7 +39,7 @@ export default function SignInPage() {
                                     <Clerk.Input
                                         type="text"
                                         required
-                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 data-[invalid]:ring-red-400 data-[invalid]:focus:ring-indigo-600"
+                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 data-[invalid]:ring-red-400 data-[invalid]:focus:ring-sky-600"
                                     />
                                     <Clerk.FieldError className="block text-sm text-red-400"/>
                                 </Clerk.Field>
@@ -49,14 +49,14 @@ export default function SignInPage() {
                                     <Clerk.Input
                                         type="password"
                                         required
-                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 data-[invalid]:ring-red-400 data-[invalid]:focus:ring-indigo-600"
+                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 data-[invalid]:ring-red-400 data-[invalid]:focus:ring-sky-600"
                                     />
                                     <Clerk.FieldError className="block text-sm text-red-400"/>
                                 </Clerk.Field>
                             </div>
                             <SignIn.Action
                                 submit
-                                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
                             >
                                 Sign In
                             </SignIn.Action>
@@ -88,7 +88,7 @@ export default function SignInPage() {
                                 No account?{' '}
                                 <Link
                                     href="/sign-up"
-                                    className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                                    className="font-semibold leading-6 text-sky-600 hover:text-sky-500"
                                 >
                                     Create an account
                                 </Link>
