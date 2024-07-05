@@ -20,7 +20,7 @@ export default function EditApplicationForm({application}: { application: Applic
     const [state, formAction] = useFormState(updateApplicationWithId, initialState);
 
     const convertToCalendarDate = (date?: Date): CalendarDate | null => {
-        if(!date){
+        if (!date) {
             return null;
         }
 
@@ -91,7 +91,7 @@ export default function EditApplicationForm({application}: { application: Applic
                     </div>
                     <div className='flex flex-col md:flex-row gap-4'>
                         <Input
-                                type="text"
+                            type="text"
                             label="Location"
                             name="location"
                             isRequired

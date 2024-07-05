@@ -5,7 +5,6 @@ import {redirect} from "next/navigation";
 import {sql} from "@vercel/postgres";
 import {SafeParseError, SafeParseSuccess, z} from 'zod';
 import {ApplicationStatus, WorkType} from "@/app/lib/model/application";
-import {auth} from "@clerk/nextjs/server";
 
 export type ApplicationFormState = {
     errors?: {
@@ -57,10 +56,7 @@ const FormSchema = z.object({
 
 const ApplicationForm = FormSchema.omit({id: true, created_at: true, updated_at: true});
 
-const userMetaData = auth();
-const userId: string | null = userMetaData.userId;
-
-export async function createApplication(prevState: ApplicationFormState, formData: FormData): Promise<any> {
+export async function createApplication(userId: string, prevState: ApplicationFormState, formData: FormData): Promise<any> {
     const validatedFields: SafeParseSuccess<any> | SafeParseError<any> = validateApplicationForm(formData);
 
     if (!validatedFields.success) {

@@ -5,6 +5,7 @@ import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/react";
 import clsx from "clsx";
 import {SignOutButton, UserButton} from "@clerk/nextjs";
+import Image from "next/image";
 
 export default function Header({handleMenuClick}: { handleMenuClick: (b: boolean) => void }) {
     return (
@@ -21,7 +22,7 @@ export default function Header({handleMenuClick}: { handleMenuClick: (b: boolean
                 <div className="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true"/>
 
                 <div className="flex h-16 shrink-0 items-center lg:hidden">
-                    <img width="32" height="32" src="https://img.icons8.com/pulsar-line/48/circle-thin.png"
+                    <Image width="32" height="32" src="https://img.icons8.com/pulsar-line/48/circle-thin.png"
                          alt="circle-thin"/>
                     <h1 className="text-xl font-semibold leading-6">Application Tracker</h1>
                 </div>

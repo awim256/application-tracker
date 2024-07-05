@@ -9,12 +9,13 @@ import {ApplicationFormState, createApplication} from "@/app/lib/database/applic
 import {useFormState, useFormStatus} from 'react-dom'
 import Link from "next/link";
 
-export default function NewApplicationForm() {
+export default function NewApplicationForm({userId}: {userId: string}) {
     const {pending} = useFormStatus();
 
     const initialState: ApplicationFormState = {message: null, errors: {}};
+    const createApplicationWithUserId = createApplication.bind(null, userId);
 
-    const [state, formAction] = useFormState(createApplication, initialState);
+    const [state, formAction] = useFormState(createApplicationWithUserId, initialState);
 
     return (
         <div className='rounded-lg bg-gray-50 p-4 md:p-6'>

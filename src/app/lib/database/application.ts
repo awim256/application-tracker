@@ -5,13 +5,13 @@ import {unstable_noStore as noStore} from 'next/cache';
 import {Application, ApplicationStatus} from "@/app/lib/model/application";
 import {auth} from "@clerk/nextjs/server";
 
-const userMetaData = auth();
-const userId: string | null = userMetaData.userId;
 
 const ITEMS_PER_PAGE: number = 6;
 
 export async function fetchFilteredApplications(query: string, currentPage: number): Promise<Application[]> {
     noStore();
+
+    const {userId} = auth();
 
     const offset: number = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -40,13 +40,17 @@ export async function fetchFilteredApplications(query: string, currentPage: numb
 export async function fetchApplicationPages(query: string): Promise<number> {
     noStore();
 
+    const {userId} = auth();
+
     try {
         const data: QueryResult = await sql`SELECT COUNT(*)
     FROM applications
     WHERE
+        user_id = ${userId} AND (
         company_name ILIKE ${`%${query}%`} OR
         position ILIKE ${`%${query}%`} OR
         status ILIKE ${`%${query}%`}
+        )
   `;
 
         return Math.ceil(data.rows[0].count / 6);
@@ -58,6 +62,7 @@ export async function fetchApplicationPages(query: string): Promise<number> {
 
 export async function fetchApplicationById(id: string): Promise<Application> {
     noStore();
+    const {userId} = auth();
 
     try {
         const data: QueryResult<Application> = await sql<Application>`
@@ -73,6 +78,8 @@ export async function fetchApplicationById(id: string): Promise<Application> {
 
 export async function fetchApplicationsOverTwoWeeks(): Promise<Application[]> {
     noStore();
+
+    const {userId} = auth();
 
     try {
         console.log('Fetching application data...');
@@ -91,7 +98,7 @@ export async function fetchApplicationsOverTwoWeeks(): Promise<Application[]> {
 export async function fetchStats(): Promise<any> {
     noStore();
 
-    console.log('userid', userId)
+    const {userId} = auth();
 
     try {
         const applicationCountPromise: Promise<QueryResult> = sql`SELECT COUNT(*) 
