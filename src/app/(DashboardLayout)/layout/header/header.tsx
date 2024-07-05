@@ -40,7 +40,9 @@ export default function Header({handleMenuClick}: { handleMenuClick: (b: boolean
                         <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true"/>
 
                         {/* Profile dropdown */}
+                        <div className="hidden sm:block">
                         <UserButton userProfileUrl="/user-profile" showName={true}/>
+                        </div>
                     </div>
                 </div>
             </div>
