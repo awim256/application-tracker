@@ -18,6 +18,7 @@ export default function StatusChip({status}: { status: string }) {
             return <Chip color="danger">Rejected</Chip>;
         case ApplicationStatus.ACCEPTED:
             return <Chip color="success">Accepted</Chip>;
-
+        case ApplicationStatus.ARCHIVED:
+            return <Chip>Archived</Chip>;
     }
 }
